@@ -8,7 +8,7 @@ blockFolder.Name = "BlockFolder"
 const neights = [
     new Vector3(0, 1, 0),
     new Vector3(0, -1, 0),
-    new Vector3(-1, 0, 0),
+    new Vector3(1, 0, 0),
     new Vector3(-1, 0, 0),
     new Vector3(0, 0, 1),
     new Vector3(0, 0, -1),
@@ -45,9 +45,9 @@ export abstract class World {
 
         if (!this.world[pos.X]) { this.world[pos.X] = [] }
         if (!this.world[pos.X][pos.Y]) { this.world[pos.X][pos.Y] = [] }
-        this.world[pos.X][pos.Y][pos.Z] = block
-
         block.setPosition(pos)
+        this.world[pos.X][pos.Y][pos.Z] = block
+        
         block.getBlock().Parent = blockFolder
 
         this.emit(EmitWorldType.BlockAdded, block)
@@ -77,7 +77,7 @@ export abstract class World {
         return this.getBlock(pos.add(direction))
     }
 
-    /**
+    
     public static deleteBlock(pos: Vector3) {
         const block = this.getBlock(pos)
 
@@ -86,5 +86,5 @@ export abstract class World {
             this.world[pos.X][pos.Y].clear()
             this.emit(EmitWorldType.BlockRemoved, block)
         }
-    }*/
+    }
 }

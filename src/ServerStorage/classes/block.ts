@@ -84,10 +84,17 @@ export abstract class Block
 
     public setPosition(position: Vector3) {
         const block = World.getBlock(this.getPosition())
-        if (!block) return
+        if (block) return
 
         this.Instance.Position = position.mul(BLOCK_SIZE)
         this.emit(EmitBlockType.Position, position)
+    }
+
+    protected setTextureStuds(U: number, V: number) {
+        this.Textures.forEach(texture => {
+            texture.StudsPerTileU = U,
+            texture.StudsPerTileV = V
+        })
     }
 
     public destroy() {

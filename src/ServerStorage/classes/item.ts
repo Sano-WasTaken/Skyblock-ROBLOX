@@ -1,6 +1,5 @@
-import { BlockItem } from "./blockItem";
 import { Materials } from "./materials";
-import { ItemMeta } from "./metatable";
+import { ItemMeta } from "./itemMeta";
 
 export class Item {
 	material?: Materials;

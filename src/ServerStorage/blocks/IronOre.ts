@@ -2,7 +2,9 @@ import { ItemDict } from "ServerStorage/ItemDict";
 import { Block } from "ServerStorage/classes/block";
 import { Materials } from "ServerStorage/classes/materials";
 
-export class Iron_Ore extends Block {
+export = class Iron_Ore extends Block {
+
+    static name = "Iron Ore"
 
     constructor() {
         super(Materials.Stone, new Instance("Part"))
@@ -16,6 +18,8 @@ export class Iron_Ore extends Block {
             Back: id,
             Front: id
         })
+
+        this.setTextureStuds(3, 3)
 
         const lootTable = this.getLootTable()
 
