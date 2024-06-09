@@ -1,23 +1,14 @@
+import { BlockItem } from "./blockItem";
 import { Materials } from "./materials";
-import { ToolTip } from "./tooltips";
+import { ItemMeta } from "./metatable";
 
-class ItemMeta {
-	maxStackSize = 0;
-	canBeAnchanted = false;
-	unbreakable = false;
-	toolTip = ToolTip.Undefined;
-	displayName = "DisplayName";
-	durability = 0;
-	lore = "";
-}
-
-export abstract class Item {
-	name: Materials;
+export class Item {
+	material?: Materials;
+	name = "";
 	sprite: string;
-	itemMeta: ItemMeta;
+	private itemMeta: ItemMeta;
 
 	constructor() {
-		this.name = Materials.Air;
 		this.sprite = "Sprite";
 		this.itemMeta = new ItemMeta();
 	}
@@ -25,12 +16,20 @@ export abstract class Item {
 	public getItemMeta() {
 		return this.itemMeta;
 	}
+
+	public getItemStack(amount = 1) {
+		const itemStack = new ItemStack(
+			this, amount
+		)
+
+		return itemStack
+	}
 }
 
 export class ItemStack {
-	item: Item
-	itemMeta: ItemMeta
-	size: number
+	private item: Item
+	private itemMeta: ItemMeta
+	private size: number
 
 	constructor(item: Item, size = 1) {
 		this.item = item
@@ -38,9 +37,9 @@ export class ItemStack {
 		this.size = (size < this.itemMeta.maxStackSize) ? size : this.itemMeta.maxStackSize
 	}
 
-	public getItemMeta() {
-		return this.itemMeta;
-	}
+	public getItemMeta() { return this.itemMeta }
+	public getItem() { return this.item }
+	public getSize() { return this.size }
 
 	public addToStack(item: ItemStack) {
 		if (item.item.name === this.item.name && this.size + item.size <= this.itemMeta.maxStackSize) this.size += item.size

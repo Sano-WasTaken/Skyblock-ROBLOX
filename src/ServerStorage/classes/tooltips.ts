@@ -4,5 +4,6 @@ export enum ToolTip {
   Pickaxe,
   Sword,
   Axe,
+  Miscellanous,
   Undefined,
 }

@@ -1,9 +1,0 @@
-export class MetaDataTable
-{
-
-
-    constructor()
-    {
-
-    }
-}
