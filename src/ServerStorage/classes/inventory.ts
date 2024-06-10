@@ -1,4 +1,4 @@
-import Signal from "@rbxts/signal";
+import Signal from "signal-ts";
 import { ItemStack } from "./item";
 
 const HttpService = game.GetService("HttpService");

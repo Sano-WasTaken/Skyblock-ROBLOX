@@ -1,4 +1,4 @@
-import Signal from "@rbxts/signal"
+import Signal from "signal-ts"
 import { Materials } from "./materials"
 import { LootTable } from "./lootTable"
 import { World } from "./editableWorldGrid"

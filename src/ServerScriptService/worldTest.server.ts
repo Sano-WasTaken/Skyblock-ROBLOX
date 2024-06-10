@@ -7,14 +7,13 @@ const stone1 = new StoneBlock()
 const stone2 = new StoneBlock()
 const ironOre1 = new Iron_Ore()
 
-
 // listeners
-World.getListener<Block>(EmitWorldType.BlockAdded).Connect((block) => {
-    print(block, "added to world")
-})
-
 World.getListener<Block>(EmitWorldType.BlockRemoved).Connect((block) => {
     print(block, "removed to world")
+})
+
+World.getListener<Block>(EmitWorldType.BlockAdded).Connect((block) => {
+    print(block, "added to world")
 })
 
 // Blocks add to world

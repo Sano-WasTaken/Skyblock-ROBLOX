@@ -1,4 +1,4 @@
-import Signal from "@rbxts/signal";
+import Signal from "signal-ts";
 import { Block } from "./block";
 import { Materials } from "./materials";
 import { IOType, ItemType } from "./elementType";

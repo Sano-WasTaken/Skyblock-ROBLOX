@@ -1,5 +1,5 @@
 import { Workspace } from "@rbxts/services";
-import Signal from "@rbxts/signal";
+import Signal from "signal-ts";
 import { Block } from "ServerStorage/classes/block";
 
 const blockFolder = new Instance("Folder", Workspace)
@@ -33,6 +33,7 @@ export abstract class World {
         const signal = new Signal<(...args: T[]) => void>()
 
         this.update.Connect((et, ...args) => {
+            print(et, emitType)
             if (et === emitType) { signal.Fire(...args as T[]) }
         })
 
