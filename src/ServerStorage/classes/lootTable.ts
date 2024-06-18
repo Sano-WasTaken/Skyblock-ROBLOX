@@ -1,5 +1,5 @@
 import { ItemDict, getItem } from "ServerStorage/ItemDict";
-import { Item, ItemStack } from "./item";
+import { Item, ItemStack } from "./tools/item";
 
 interface item{
     Item: ItemDict,

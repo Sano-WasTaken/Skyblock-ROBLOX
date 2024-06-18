@@ -1,8 +1,8 @@
 import { ServerStorage } from "@rbxts/services";
-import { Item } from "./classes/item";
+import { Item } from "./classes/tools/item";
 
 export enum ItemDict {
-    Stone
+    Stone,
 }
 
 export function getItem(name: ItemDict) {

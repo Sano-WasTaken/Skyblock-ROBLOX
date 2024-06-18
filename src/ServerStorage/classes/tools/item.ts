@@ -1,10 +1,10 @@
-import { Materials } from "./materials";
-import { ItemMeta } from "./itemMeta";
+import { Materials } from "../../../ReplicatedStorage/enums/materials";
+import { ItemMeta } from "../itemMeta";
 
 export class Item {
-	material?: Materials;
-	name = "";
-	sprite: string;
+	private material?: Materials;
+	protected name = "Item";
+	private sprite: string;
 	private itemMeta: ItemMeta;
 
 	constructor() {
@@ -15,6 +15,8 @@ export class Item {
 	public getItemMeta() {
 		return this.itemMeta;
 	}
+
+	public getName() { return this.name }
 
 	public getItemStack(amount = 1) {
 		const itemStack = new ItemStack(
@@ -41,7 +43,7 @@ export class ItemStack {
 	public getSize() { return this.size }
 
 	public addToStack(item: ItemStack) {
-		if (item.item.name === this.item.name && this.size + item.size <= this.itemMeta.maxStackSize) this.size += item.size
+		if (item.item.getName() === this.item.getName() && this.size + item.size <= this.itemMeta.maxStackSize) this.size += item.size
 	}
 
 	public isFull() {

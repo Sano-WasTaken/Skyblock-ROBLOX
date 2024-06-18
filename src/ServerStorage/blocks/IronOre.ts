@@ -1,27 +1,25 @@
 import { ItemDict } from "ServerStorage/ItemDict";
-import { Block } from "ServerStorage/classes/block";
-import { Materials } from "ServerStorage/classes/materials";
+import { Block, BlockRenderType } from "ServerStorage/classes/tools/block";
+import { Materials } from "ReplicatedStorage/enums/materials";
 
 export = class Iron_Ore extends Block {
 
-    static name = "Iron Ore"
+    public blockName = "Iron Ore"
 
     constructor() {
-        super(Materials.Stone, new Instance("Part"))
+        super(Materials.Stone, BlockRenderType.Blocked, new Instance("Part"))
         const id = "rbxassetid://17790820382"
+
+        const lootTable = this.getLootTable()
 
         this.setTextures({
             Top: id,
             Bottom: id,
             Right: id,
             Left: id,
+            Front: id,
             Back: id,
-            Front: id
         })
-
-        this.setTextureStuds(3, 3)
-
-        const lootTable = this.getLootTable()
 
         lootTable.setItem({
             Item: ItemDict.Stone,

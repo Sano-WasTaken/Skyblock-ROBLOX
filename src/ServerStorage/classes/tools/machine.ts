@@ -1,7 +1,7 @@
-import Signal from "signal-ts";
-import { Block } from "./block";
-import { Materials } from "./materials";
-import { IOType, ItemType } from "./elementType";
+import Signal from "@rbxts/signal-ts";
+import { Block, BlockRenderType } from "./block";
+import { Materials } from "../../../ReplicatedStorage/enums/materials";
+import { IOType, ItemType } from "../../../ReplicatedStorage/enums/elementType";
 
 // Describe if the I/O is open or closed
 interface IO {
@@ -54,8 +54,8 @@ export abstract class Machine extends Block {
     
     private IO = new MachineryIO()
 
-    constructor() {
-        super(Materials.Stone, new Instance("Part"))
+    constructor(renderMesh: BasePart) {
+        super(Materials.Stone, BlockRenderType.Blocked, renderMesh)
 
         this.IO.setInputs({
             Top: {

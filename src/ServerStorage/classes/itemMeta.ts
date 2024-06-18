@@ -1,4 +1,4 @@
-import { ToolTip } from "./tooltips";
+import { ToolTip } from "../../ReplicatedStorage/enums/tooltips";
 
 export class ItemMeta {
 	maxStackSize = 0;

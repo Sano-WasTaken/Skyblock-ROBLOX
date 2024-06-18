@@ -1,34 +1,31 @@
 import { ItemDict } from "ServerStorage/ItemDict";
-import { Block } from "ServerStorage/classes/block";
-import { Materials } from "ServerStorage/classes/materials";
+import { Block, BlockRenderType } from "ServerStorage/classes/tools/block";
+import { Materials } from "ReplicatedStorage/enums/materials";
 
 export = class StoneBlock extends Block {
-
-    static name = "Stone"
+    public blockName = "Stone"
 
     constructor() {
-        super(Materials.Stone, new Instance("Part"))
+        super(Materials.Stone, BlockRenderType.Blocked, new Instance("Part"))
         const id = "rbxassetid://17790815768"
-        
+
+        const lootTable = this.getLootTable()
+
         this.setTextures({
             Top: id,
             Bottom: id,
             Right: id,
             Left: id,
+            Front: id,
             Back: id,
-            Front: id
         })
-
-        this.setTextureStuds(3, 3)
-
-        const lootTable = this.getLootTable()
 
         lootTable.setItem({
             Item: ItemDict.Stone,
             MaximumMultiplier: 1,
             MinimumMultiplier: 1,
             Maximum: 1,
-            Minimum: 1
+            Minimum: 1,
         })
     }
 

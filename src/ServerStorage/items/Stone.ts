@@ -1,12 +1,12 @@
 import StoneBlock from "ServerStorage/blocks/Stone";
-import { BlockItem } from "ServerStorage/classes/blockItem";
+import { BlockItem } from "ServerStorage/classes/tools/blockItem";
 
 export = class Stone extends BlockItem
 {
-    static name = "Stone"
-
     constructor() {
         super()
+        
+        this.name = "Stone"
 
         this.setBlock(StoneBlock)
     }

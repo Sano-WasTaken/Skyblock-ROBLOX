@@ -25,6 +25,9 @@
   },
   "dependencies": {
     "@rbxts/red": "^1.0.2",
+    "@rbxts/reflex": "^4.3.1",
+    "@rbxts/roact": "npm:@rbxts/roact",
+    "@rbxts/roact-hooked": "^2.6.2",
     "@rbxts/services": "^1.5.4",
     "@rbxts/signal-ts": "file:../Signal Ts/rbxts-signal-ts-1.0.0.tgz"
   }

@@ -1,34 +1,72 @@
 import { EmitWorldType, World } from "ServerStorage/classes/editableWorldGrid";
 import StoneBlock from "ServerStorage/blocks/Stone";
-import { Block } from "ServerStorage/classes/block";
+import { Block } from "ServerStorage/classes/tools/block";
 import Iron_Ore from "ServerStorage/blocks/IronOre";
+import SpawnBlock from "ServerStorage/blocks/Spawn";
+import { Workspace } from "@rbxts/services";
+import { Server } from "@rbxts/red";
 
-const stone1 = new StoneBlock()
-const stone2 = new StoneBlock()
-const ironOre1 = new Iron_Ore()
+const server = Server("Block")
 
-// listeners
-World.getListener<Block>(EmitWorldType.BlockRemoved).Connect((block) => {
-    print(block, "removed to world")
+function raycast(player: Player, ray: Ray): [BasePart, Vector3] | undefined {
+    const raycastParams = new RaycastParams()
+    raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+    raycastParams.FilterDescendantsInstances = [player.Character as Model]
+
+    const raycastResult = Workspace.Raycast(ray.Origin, ray.Direction.mul(100), raycastParams)
+
+    const instance = raycastResult?.Instance
+
+    if (instance && instance.IsA("BasePart") && instance.GetAttribute("Block")) {
+        return [instance, raycastResult.Normal]
+    }
+}
+
+
+World.addBlock(new SpawnBlock(), new Vector3(0, 3, 0))
+
+for (let x = -15; x < 15; x++) {
+    for (let y = -15; y < 15; y++) {
+        const b = new StoneBlock()
+
+        World.addBlock(b, new Vector3(x, 3, y))
+    }
+}
+
+server.On("RaycastBlockDelete", (player: Player, ray: Ray) => {
+    const result = raycast(player, ray)
+
+    if (result) {
+        const [instance, normal] = result
+
+        const newPos = instance.Position.div(3)
+
+        const block = World.getBlock(newPos)
+
+        if (block && !block.getBlockMeta().unbreakable) {
+            World.deleteBlock(newPos)
+        }
+    }
 })
 
-World.getListener<Block>(EmitWorldType.BlockAdded).Connect((block) => {
-    print(block, "added to world")
+server.On("RaycastBlockCreate", (player: Player, ray: Ray) => {
+    const result = raycast(player, ray)
+
+    if (result) {
+        const [instance, normal] = result
+
+        const newPos = instance.Position.div(3).add(normal)
+
+        print(newPos)
+        
+        const collidingParts = Workspace.GetPartBoundsInBox(new CFrame(instance.Position.add(normal.mul(Vector3.one.mul(3)))), Vector3.one.mul(2.5))
+
+        print(collidingParts)
+
+        if (collidingParts.size() === 0) {
+            const b = new StoneBlock()
+
+            World.addBlock(b, newPos)
+        }
+    }
 })
-
-// Blocks add to world
-World.addBlock(stone1, new Vector3(0,8,0))
-World.addBlock(stone2, new Vector3(0,9,0))
-World.addBlock(ironOre1, new Vector3(1,8,0))
-
-wait(1)
-
-print(World.getNeighbors(stone1.getPosition()), "this are the neighbors of this block") // two blocks are neighbors
-
-wait(5)
-
-World.deleteBlock(stone2.getPosition())
-
-wait(1)
-
-print(World.getNeighbors(stone1.getPosition()), "this are the neighbors of this block") // now only one block

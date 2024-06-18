@@ -1,5 +1,5 @@
-import Signal from "signal-ts";
-import { ItemStack } from "./item";
+import Signal from "@rbxts/signal-ts";
+import { ItemStack } from "./tools/item";
 
 const HttpService = game.GetService("HttpService");
 
@@ -23,7 +23,7 @@ export class Inventory {
 	public addItem(item: ItemStack) {
 		const itemStack = this.slots.find(
 			itStack => itStack.getItemMeta().toolTip === item.getItemMeta().toolTip &&
-			itStack.getItem().name === item.getItem().name &&
+			itStack.getItem().getName() === item.getItem().getName() &&
 			itStack.getSize() + item.getSize() <= itStack.getItemMeta().maxStackSize
 		)
 
