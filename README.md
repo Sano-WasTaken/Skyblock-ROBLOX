@@ -1,2 +1,2 @@
-# Skyblock---Architechture
+# Skyblock-Architechture
 no desc for now :(
