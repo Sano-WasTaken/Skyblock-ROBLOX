@@ -8,7 +8,7 @@ export = class SpawnBlock extends Block {
 	protected blockID = BlockEnum.Spawn_Block;
 
 	constructor() {
-		super(Materials.Stone, BlockRenderType.Blocked, new Instance("SpawnLocation"));
+		super(Materials.Stone, BlockRenderType.Block, new Instance("SpawnLocation"));
 
 		this.getBlockMeta().unbreakable = true;
 

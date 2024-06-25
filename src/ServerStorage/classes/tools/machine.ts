@@ -81,7 +81,7 @@ export abstract class Machine extends Block {
 	public isMachine = true;
 
 	constructor(renderMesh: BasePart) {
-		super(Materials.Machine, BlockRenderType.Blocked, renderMesh);
+		super(Materials.Machine, BlockRenderType.Block, renderMesh);
 
 		this.IO.setInputs({
 			Back: {

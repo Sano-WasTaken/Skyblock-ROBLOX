@@ -18,7 +18,7 @@ export = class StoneBlock extends Block {
 	};
 
 	constructor() {
-		super(Materials.Stone, BlockRenderType.Blocked, new Instance("Part"));
+		super(Materials.Stone, BlockRenderType.Block, new Instance("Part"));
 
 		const lootTable = this.getLootTable();
 

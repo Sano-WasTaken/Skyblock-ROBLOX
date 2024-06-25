@@ -3,7 +3,6 @@ import { Materials } from "../../../ReplicatedStorage/enums/materials";
 import { LootTable } from "../lootTable";
 import { World } from "../editableWorldGrid";
 import { BlockMeta } from "../blockMeta";
-import Object from "@rbxts/object-utils";
 import { BlockEnum } from "ReplicatedStorage/enums/BlockEnum";
 
 export const BLOCK_SIZE = Vector3.one.mul(3);
@@ -26,7 +25,8 @@ export enum EmitBlockType {
 }
 
 export enum BlockRenderType {
-	Blocked,
+	Block,
+	Stairs,
 }
 
 export abstract class Block {

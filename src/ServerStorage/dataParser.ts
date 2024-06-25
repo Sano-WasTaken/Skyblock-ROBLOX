@@ -7,11 +7,12 @@ import Object from "@rbxts/object-utils";
 import { BlockEnum } from "ReplicatedStorage/enums/BlockEnum";
 
 interface blockData {
-	Position: number[];
+	CFrame: number[];
 	Name: string;
 	IO?: {};
 	container?: Inventory;
 	result?: Inventory;
+	Inventory?: Inventory;
 }
 
 export function getBlock(name: string) {
@@ -24,13 +25,13 @@ export function getBlock(name: string) {
 
 export function parseBlock(block: Block | Machine) {
 	const blockData: blockData = {
-		Position: [],
+		CFrame: [],
 		Name: "",
 	};
 
 	const position = block.getPosition();
 
-	blockData.Position = [position.X, position.Y, position.Z];
+	blockData.CFrame = [position.X, position.Y, position.Z];
 	blockData.Name = block.getName();
 
 	if (block.isMachine) {
