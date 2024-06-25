@@ -44,7 +44,7 @@ function convertVectorToNormal(normal: Vector3) {
 }
 
 export abstract class World {
-	private static grid: (Block | undefined)[][][] = [];
+	private static grid: Block[][][] = [];
 	private static update = new Signal<(emitType: EmitWorldType, ...args: unknown[]) => void>();
 
 	private static emit(emitType: EmitWorldType, ...args: unknown[]) {
@@ -118,6 +118,7 @@ export abstract class World {
 		return this.grid;
 	}
 
+	// for face culling
 	public static updateTextures(position: Vector3) {
 		const block = this.getBlock(position);
 
@@ -142,7 +143,7 @@ export abstract class World {
 					const textureB = createTexture(normalB);
 					const id = block.getTextures()[normalB.Name];
 
-					if (id) textureB.Texture = id;
+					textureB.Texture = id;
 					textureB.Parent = block.getMesh();
 				}
 			});
@@ -159,7 +160,7 @@ export abstract class World {
 					const textureN = createTexture(normalN);
 					const id = neighbor.getTextures()[normalN.Name];
 
-					if (id) textureN.Texture = id;
+					textureN.Texture = id;
 					textureN.Parent = neighbor.getMesh();
 
 					//print("texture created", textureN, textureN.Parent !== undefined, textureN.Parent)

@@ -16,22 +16,23 @@ export class Inventory {
 		this.updated = new Signal();
 	}
 
-	private getEmptySlot() {
-		return this.slots.findIndex(itStack => itStack === undefined)
+	private getEmptySlot(): number | undefined {
+		return this.slots.findIndex((itStack) => itStack === undefined);
 	}
 
 	public addItem(item: ItemStack) {
 		const itemStack = this.slots.find(
-			itStack => itStack.getItemMeta().toolTip === item.getItemMeta().toolTip &&
-			itStack.getItem().getName() === item.getItem().getName() &&
-			itStack.getSize() + item.getSize() <= itStack.getItemMeta().maxStackSize
-		)
+			(itStack) =>
+				itStack.getItemMeta().toolTip === item.getItemMeta().toolTip &&
+				itStack.getItem().getName() === item.getItem().getName() &&
+				itStack.getSize() + item.getSize() <= itStack.getItemMeta().maxStackSize,
+		);
 
 		if (itemStack) {
-			itemStack.addToStack(item)
+			itemStack.addToStack(item);
 		} else {
-			const newIndex = this.getEmptySlot()
-			this.slots[newIndex] = item
+			const newIndex = this.getEmptySlot();
+			if (newIndex) this.slots[newIndex] = item;
 		}
 	}
 }

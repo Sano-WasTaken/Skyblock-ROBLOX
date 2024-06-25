@@ -3,16 +3,20 @@ import { Materials } from "../../../ReplicatedStorage/enums/materials";
 import { LootTable } from "../lootTable";
 import { World } from "../editableWorldGrid";
 import { BlockMeta } from "../blockMeta";
+import Object from "@rbxts/object-utils";
+import { BlockEnum } from "ReplicatedStorage/enums/BlockEnum";
 
 export const BLOCK_SIZE = Vector3.one.mul(3);
 
+const NONEID = "rbxassetid://17869810803";
+
 export interface Ids {
-	Top?: string;
-	Bottom?: string;
-	Right?: string;
-	Left?: string;
-	Front?: string;
-	Back?: string;
+	Top: string;
+	Bottom: string;
+	Right: string;
+	Left: string;
+	Front: string;
+	Back: string;
 }
 
 export enum EmitBlockType {
@@ -28,7 +32,14 @@ export enum BlockRenderType {
 export abstract class Block {
 	private instance?: BasePart;
 	private material: Materials;
-	private textures: Ids;
+	protected textures = {
+		Top: NONEID,
+		Bottom: NONEID,
+		Right: NONEID,
+		Left: NONEID,
+		Front: NONEID,
+		Back: NONEID,
+	};
 	private rendererType: BlockRenderType;
 	private orientation = new Vector3();
 	private position = new Vector3();
@@ -36,11 +47,11 @@ export abstract class Block {
 	private lootTable = new LootTable();
 	private blockMeta = new BlockMeta();
 	protected renderMesh: BasePart;
-	protected blockName = "";
+	protected blockID = BlockEnum.Air;
+	public isMachine = false;
 
 	constructor(material: Materials, rendererType: BlockRenderType, renderMesh: BasePart) {
 		this.material = material;
-		this.textures = {};
 		this.rendererType = rendererType;
 
 		renderMesh.Size = BLOCK_SIZE;
@@ -51,7 +62,7 @@ export abstract class Block {
 		this.renderMesh = renderMesh;
 	}
 
-	private emit<K extends EmitBlockType>(emitType: EmitBlockType | K, ...args: unknown[]) {
+	protected emit<K extends EmitBlockType>(emitType: EmitBlockType | K, ...args: unknown[]) {
 		this.update.Fire(emitType, ...args);
 	}
 
@@ -97,10 +108,25 @@ export abstract class Block {
 
 	public setTextures(ids: Ids) {
 		this.textures = ids;
+
+		this.getMesh()
+			.GetChildren()
+			.forEach((instance) => {
+				if (instance.IsA("Texture")) {
+					const id = ids[instance.Face.Name];
+					if (id) instance.Texture = id;
+				}
+			});
 	}
 
 	public setTexture(face: Enum.NormalId, id: string) {
 		this.textures[face.Name] = id;
+
+		const texture = this.getMesh()
+			.GetChildren()
+			.find((instance) => instance.IsA("Texture") && instance.Face === face) as Texture;
+
+		if (texture) texture.Texture = id;
 	}
 
 	public setPosition(position: Vector3) {
@@ -119,8 +145,12 @@ export abstract class Block {
 		this.emit(EmitBlockType.Destroyed);
 	}
 
+	public getID() {
+		return this.blockID;
+	}
+
 	public getName() {
-		return this.blockName;
+		return BlockEnum[this.blockID];
 	}
 
 	public getBlock() {

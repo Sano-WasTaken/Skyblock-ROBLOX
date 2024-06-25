@@ -1,10 +1,11 @@
 export enum IOType {
-    Item,
-    Fluid,
-    Energy,
+	Item,
+	Fluid,
+	Energy,
 }
 
 export enum ItemType {
-    Fuel,
-    
+	Fuel,
+	Smeltable,
+	Undefined,
 }

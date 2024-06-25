@@ -24,6 +24,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@rbxts/object-utils": "^1.0.4",
     "@rbxts/red": "^1.0.2",
     "@rbxts/reflex": "^4.3.1",
     "@rbxts/roact": "npm:@rbxts/roact",

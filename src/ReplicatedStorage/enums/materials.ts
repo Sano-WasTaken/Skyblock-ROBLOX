@@ -1,6 +1,7 @@
 export enum Materials {
-  Air,
-  Stone,
-  Dirt,
-  Grass,
+	Air,
+	Stone,
+	Dirt,
+	Grass,
+	Machine,
 }
