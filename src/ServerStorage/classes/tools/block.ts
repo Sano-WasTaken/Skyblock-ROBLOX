@@ -3,31 +3,11 @@ import { Materials } from "../../../ReplicatedStorage/enums/materials";
 import { LootTable } from "../lootTable";
 import { World } from "../editableWorldGrid";
 import { BlockMeta } from "../blockMeta";
-import { BlockEnum } from "ReplicatedStorage/enums/BlockEnum";
+import { BlockEnum, BlockRenderType, EmitBlockType, Ids } from "ReplicatedStorage/enums/BlockEnums";
 
 export const BLOCK_SIZE = Vector3.one.mul(3);
 
 const NONEID = "rbxassetid://17869810803";
-
-export interface Ids {
-	Top: string;
-	Bottom: string;
-	Right: string;
-	Left: string;
-	Front: string;
-	Back: string;
-}
-
-export enum EmitBlockType {
-	"Position",
-	"SetInWorld",
-	"Destroyed",
-}
-
-export enum BlockRenderType {
-	Block,
-	Stairs,
-}
 
 export abstract class Block {
 	private instance?: BasePart;

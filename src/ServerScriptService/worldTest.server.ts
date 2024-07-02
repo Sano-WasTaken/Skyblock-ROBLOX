@@ -23,7 +23,7 @@ function raycast(player: Player, ray: Ray): [BasePart, Vector3] | undefined {
 	}
 }
 
-World.addBlock(new SpawnBlock(), new Vector3(0, 2, 0));
+World.addBlock(new SpawnBlock(), new Vector3(0, 3, 0));
 
 for (let x = -15; x <= 15; x++) {
 	for (let y = -15; y <= 15; y++) {
@@ -33,6 +33,7 @@ for (let x = -15; x <= 15; x++) {
 	}
 }
 
+// NON PERMANENT PART OF CODE
 server.On("RaycastBlockDelete", (player: Player, ray: Ray) => {
 	const result = raycast(player, ray);
 

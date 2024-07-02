@@ -1,9 +1,10 @@
 import Signal from "@rbxts/signal-ts";
-import { Block, BlockRenderType } from "./block";
+import { Block } from "./block";
 import { Materials } from "../../../ReplicatedStorage/enums/materials";
 import { IOType, ItemType } from "../../../ReplicatedStorage/enums/elementType";
 import { RunService } from "@rbxts/services";
 import { Inventory } from "../inventory";
+import { BlockRenderType } from "ReplicatedStorage/enums/BlockEnums";
 
 // Describe if the I/O is open or closed
 interface IO {

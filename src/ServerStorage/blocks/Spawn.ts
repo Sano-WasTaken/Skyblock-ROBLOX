@@ -1,6 +1,6 @@
-import { BlockEnum } from "ReplicatedStorage/enums/BlockEnum";
+import { BlockEnum, BlockRenderType } from "ReplicatedStorage/enums/BlockEnums";
 import { Materials } from "ReplicatedStorage/enums/materials";
-import { Block, BlockRenderType } from "ServerStorage/classes/tools/block";
+import { Block } from "ServerStorage/classes/tools/block";
 
 const id = "rbxassetid://18207763754";
 

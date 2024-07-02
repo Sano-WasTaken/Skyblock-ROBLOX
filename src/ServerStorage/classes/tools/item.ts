@@ -1,10 +1,5 @@
+import { SpriteRenderType } from "ReplicatedStorage/enums/RenderType";
 import { ItemMeta } from "../itemMeta";
-
-export enum SpriteRenderType {
-	Blocked,
-	SingleSprite,
-	CustomMesh,
-}
 
 interface Ids {
 	Top?: string;

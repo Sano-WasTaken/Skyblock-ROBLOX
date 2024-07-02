@@ -1,6 +1,6 @@
+import { SpriteRenderType } from "ReplicatedStorage/enums/RenderType";
 import StoneBlock from "ServerStorage/blocks/Stone";
 import { BlockItem } from "ServerStorage/classes/tools/blockItem";
-import { SpriteRenderType } from "ServerStorage/classes/tools/item";
 
 export = class Stone extends BlockItem {
 	public name = "Stone";

@@ -1,7 +1,7 @@
 import { ItemDict } from "ServerStorage/ItemDict";
-import { Block, BlockRenderType, Ids } from "ServerStorage/classes/tools/block";
+import { Block } from "ServerStorage/classes/tools/block";
 import { Materials } from "ReplicatedStorage/enums/materials";
-import { BlockEnum } from "ReplicatedStorage/enums/BlockEnum";
+import { BlockEnum, BlockRenderType } from "ReplicatedStorage/enums/BlockEnums";
 
 const id = "rbxassetid://17790820382";
 

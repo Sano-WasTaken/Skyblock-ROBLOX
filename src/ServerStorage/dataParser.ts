@@ -3,8 +3,6 @@ import { World } from "./classes/editableWorldGrid";
 import { Block } from "./classes/tools/block";
 import { Machine } from "./classes/tools/machine";
 import { Inventory } from "./classes/inventory";
-import Object from "@rbxts/object-utils";
-import { BlockEnum } from "ReplicatedStorage/enums/BlockEnum";
 
 interface blockData {
 	CFrame: number[];
