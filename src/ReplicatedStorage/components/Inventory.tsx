@@ -1,4 +1,4 @@
-import Roact, { Children, Element, Ref } from "@rbxts/roact";
+import Roact, { Element } from "@rbxts/roact";
 import { Ids } from "ReplicatedStorage/enums/BlockEnums";
 import { SpriteRenderType } from "ReplicatedStorage/enums/RenderType";
 
