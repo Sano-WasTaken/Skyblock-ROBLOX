@@ -1,6 +1,7 @@
 import Roact, { Tree } from "@rbxts/roact";
 import { Players, UserInputService } from "@rbxts/services";
 import { createInventory } from "ReplicatedStorage/components/Inventory";
+import { SpriteRenderType } from "ReplicatedStorage/enums/RenderType";
 
 const player = Players.LocalPlayer;
 
@@ -8,14 +9,16 @@ const [stateInv, inventory] = createInventory({
 	Items: [],
 	Position: UDim2.fromScale(0.5, 0.65),
 	Scale: 0.85,
-	Slots: 4 * 9,
+	Rows: 9,
+	Columns: 4,
 });
 
 const [stateSlots, slots] = createInventory({
-	Items: [],
+	Items: [{ Amount: 1, Name: "test", ID: "rbxassetid://17790749739", rendertype: SpriteRenderType.SingleSprite }],
 	Position: UDim2.fromScale(0.5, 0.9),
 	Scale: 1,
-	Slots: 9,
+	Rows: 9,
+	Columns: 1,
 });
 
 let toggle = false;

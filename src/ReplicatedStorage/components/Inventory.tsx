@@ -11,7 +11,8 @@ export interface item {
 
 interface props {
 	Items: item[];
-	Slots: number;
+	Rows: number;
+	Columns: number;
 	Scale: number;
 	Position: UDim2;
 }
@@ -44,7 +45,7 @@ export class Item extends Roact.Component<{ i: number; item: item | undefined }>
 
 		switch (item?.rendertype) {
 			case SpriteRenderType.Blocked:
-				const part = createBlock(item.ID as Ids);
+				const part = createBlock(item.ID);
 				renderElement = (
 					<viewportframe
 						Size={UDim2.fromScale(1, 1)}
@@ -108,8 +109,10 @@ class Inventory extends Roact.Component<
 > {
 	public render(): Roact.Element {
 		const items: Roact.Element[] = [];
+		const rows = this.props.Rows;
+		const columns = this.props.Columns;
 
-		for (let i = 0; i < this.props.Slots; i++) {
+		for (let i = 0; i < rows * columns; i++) {
 			const item = this.props.Items[i];
 
 			items.push(<Item i={i} item={item} />);
@@ -119,10 +122,7 @@ class Inventory extends Roact.Component<
 			<screengui Enabled={true}>
 				<frame
 					AnchorPoint={Vector2.one.div(2)}
-					Size={UDim2.fromOffset(
-						9 * 70 + 10 * 8 + 2 * 5,
-						(this.props.Slots / 9) * 70 + 10 * (this.props.Slots / 9 - 1) + 2 * 5,
-					)}
+					Size={UDim2.fromOffset(rows * 70 + 10 * 8 + 2 * 5, columns * 70 + 10 * (columns - 1) + 2 * 5)}
 					Position={this.props.Position}
 					BorderSizePixel={0}
 				>
@@ -158,7 +158,8 @@ export function createInventory(
 			Items={props.Items}
 			Position={props.Position}
 			Scale={props.Scale}
-			Slots={props.Slots}
+			Rows={props.Rows}
+			Columns={props.Columns}
 			binding={binding}
 		/>,
 	];
